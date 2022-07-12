@@ -2,11 +2,13 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
+from .validators import bitrate_validator
+
 
 class ParentWithTitle(models.Model):
     """ Parent model for all. """
 
-    title = models.CharField(max_length=50, unique=True)
+    title = models.CharField('Наименование', max_length=50, unique=True)
 
     class Meta:
         abstract = True
@@ -18,7 +20,7 @@ class ParentWithTitle(models.Model):
 class ParentContent(ParentWithTitle):
     """ Parent model for content. """
 
-    count = models.PositiveIntegerField(default=0)
+    count = models.PositiveIntegerField('Счетчик просмотров', default=0)
 
     class Meta:
         abstract = True
@@ -27,20 +29,25 @@ class ParentContent(ParentWithTitle):
 class Video(ParentContent):
     """ Model for video. """
 
-    video_link = models.URLField()
-    subtitles_link = models.URLField()
+    video_link = models.URLField('Ссылка на видео')
+    subtitles_link = models.URLField('Ссылка на субтитры')
 
 
 class Audio(ParentContent):
     """ Model for audio. """
 
-    bitrate = models.DecimalField(max_digits=9, decimal_places=2)
+    bitrate = models.DecimalField(
+        'Битрейт',
+        max_digits=9,
+        decimal_places=2,
+        validators=[bitrate_validator],
+    )
 
 
 class Text(ParentContent):
     """ Model for text. """
 
-    describtion = models.TextField()
+    describtion = models.TextField('Описание')
 
 
 class Page(ParentWithTitle):
@@ -54,15 +61,17 @@ class Content(models.Model):
 
     page = models.ForeignKey(
         Page,
+        verbose_name='Страница-хозяин контента',
         on_delete=models.CASCADE,
         related_name='contents',
     )
     content_type = models.ForeignKey(
         ContentType,
+        verbose_name='Тип контента',
         on_delete=models.CASCADE,
         limit_choices_to={'model__in': ('text', 'video', 'audio')}
     )
-    object_id = models.PositiveIntegerField()
+    object_id = models.PositiveIntegerField('id контента')
     content_object = GenericForeignKey('content_type', 'object_id')
 
     def __str__(self):
