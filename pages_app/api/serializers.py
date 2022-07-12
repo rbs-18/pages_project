@@ -1,7 +1,7 @@
-from rest_framework import serializers
 from generic_relations.relations import GenericRelatedField
+from rest_framework import serializers
 
-from pages.models import Content, Page, Audio, Video, Text
+from pages.models import Audio, Content, Page, Text, Video
 
 
 class ContentSerializer(serializers.ModelSerializer):

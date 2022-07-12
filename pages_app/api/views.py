@@ -1,11 +1,13 @@
 from rest_framework import viewsets
 
 from pages.models import Page
-from .serializers import PageListSerializer, PageDetailSerializer
 from services.views import increase_counters
+from .serializers import PageDetailSerializer, PageListSerializer
 
 
 class PagesViewSet(viewsets.ReadOnlyModelViewSet):
+    """ ViewSet for Page model. """
+
     queryset = Page.objects.all()
     serializer_class = PageListSerializer
 
