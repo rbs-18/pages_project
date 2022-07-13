@@ -4,7 +4,7 @@
 API service for monitoring pages. Admin can create new pages, new content (video, audio, text),
 fill pages by content. Users can see pages and page content with API interface.
 
-### POSTS
+### PAGES
  - #### GETTING LIST OF Pages
 
  `api/v1/pages/` `GET`
@@ -57,15 +57,15 @@ pagination page
 200, 404
 
 ## DOCUMENTATION AVAILIBLE AFTER LAUNCH:
-http://127.0.0.1:8000/redoc/
-http://127.0.0.1:8000/swagger/
+- http://127.0.0.1:8000/redoc/
+- http://127.0.0.1:8000/swagger/
 
 ## TECHNOLOGY
 
 - Python 3.8
 - Django 3.2
 - Django Rest Framework 3.13
-- Celery
+- Celery 5.2
 - Docker
 
 ## DATABASE
