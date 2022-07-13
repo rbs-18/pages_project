@@ -75,7 +75,7 @@ http://127.0.0.1:8000/swagger/
 ## HOW TO START PROJECT
 - Clone repository and going:
 ```
-git clone ...
+git clone git@github.com:rbs-18/pages_project.git -b with_sqllite
 cd /pages_project
 ```
 

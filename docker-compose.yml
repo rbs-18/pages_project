@@ -36,6 +36,5 @@ services:
     env_file:
       - ./.env
     depends_on:
-      # - web
       - redis
       - celery
