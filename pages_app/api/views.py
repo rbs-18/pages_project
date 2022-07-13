@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 
 from pages.models import Page
-from services.views import increase_counters
 from .serializers import PageDetailSerializer, PageListSerializer
+from services.tasks import task_counter
 
 
 class PagesViewSet(viewsets.ReadOnlyModelViewSet):
@@ -18,5 +18,5 @@ class PagesViewSet(viewsets.ReadOnlyModelViewSet):
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
-        increase_counters(instance.id)
+        task_counter.delay(instance.id)
         return super().retrieve(request, *args, **kwargs)
