@@ -102,4 +102,4 @@ docker-compose exec web python manage.py createsuperuser
   port: 5555
 
 # AUTHORS
-*Kozhevnikov Aleksei*
+*_Kozhevnikov Aleksei_*
