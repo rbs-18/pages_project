@@ -58,6 +58,7 @@ pagination page
 
 ## DOCUMENTATION AVAILIBLE AFTER LAUNCH:
 http://127.0.0.1:8000/redoc/
+
 http://127.0.0.1:8000/swagger/
 
 ## TECHNOLOGY
@@ -70,8 +71,7 @@ http://127.0.0.1:8000/swagger/
 
 ## DATABASE
 
-- PostgreSQL (Default)
-- SQLite (without dates)
+- PostgreSQL
 
 ## HOW TO START PROJECT
 - Clone repository and going:
@@ -79,15 +79,43 @@ http://127.0.0.1:8000/swagger/
 git clone git@github.com:rbs-18/pages_project.git
 cd /pages_project
 ```
-- Create .env file
+- Create .env file (like template)
+
+DEBUG=...
+
+SECRET_KEY=...
+
+ALLOWED_HOSTS=...
+
+CELERY_BROKER_URL=...
+
+CELERY_RESULT_BACKEND=...
+
+DB_ENGINE=...
+
+POSTGRES_USER=...
+
+POSTGRES_PASSWORD=...
+
+POSTGRES_DB=...
+
+DB_HOST=...
+
+DB_PORT=...
 
 - Deploy and launch app:
 ```bash
 docker-compose up -d --build
 ```
+
 - Make migrations:
 ```bash
 docker-compose exec web python manage.py migrate
+```
+
+- Fill database by data (optionally):
+```bash
+docker-compose exec web python manage.py loaddata fixtures.json
 ```
 
 - Create superuser
@@ -102,4 +130,4 @@ docker-compose exec web python manage.py createsuperuser
   port: 5555
 
 # AUTHORS
-*Kozhevnikov Aleksei*
+*_Kozhevnikov Aleksei_*
